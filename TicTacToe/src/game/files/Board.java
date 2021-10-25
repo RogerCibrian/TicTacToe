@@ -60,20 +60,30 @@ public class Board {
 		
 		int indexCounter = 0;
 		int rowStartIndex = 0;
+		int currentColumn = 0;
+		
+		state[2] = 0;
+		state[5] = 0;
+		state[8] = 0;
 
 		for (int currentRow = 0; currentRow < getRows(); currentRow++) {
+			// check if row we're on is all equal
+			if (getState()[rowStartIndex] == getState()[rowStartIndex + 1] && getState()[rowStartIndex + 1] == getState()[rowStartIndex + 2]) {
+				System.out.println(currentRow + "winning horizontal condition detected");
+				break;
+			}
 			//System.out.print(currentRow);
-			for (int currentColumn = 0; currentColumn < getColumns(); currentColumn++) {
-				// check if row we're on is all equal
-				if (getState()[rowStartIndex] == getState()[rowStartIndex + 1] && getState()[rowStartIndex + 1] == getState()[rowStartIndex + 2]) {
-					System.out.println(currentRow + "winning horizontal condition detected");
-				// check if column we're on is all equal
-				}
-				else if (getState()[currentColumn] == getState()[currentColumn + 3] && getState()[currentColumn + 3] == getState()[currentColumn + 6]) {
-					System.out.println(currentRow + "winning vertical condition detected");
-				}
+			// check if column we're on is all equal
+			else if (getState()[currentColumn] == getState()[currentColumn + 3] && getState()[currentColumn + 3] == getState()[currentColumn + 6]) {
+				System.out.println(currentColumn + "winning vertical condition detected");
+				break;
+				
+			}
+			else {
+				System.out.println(currentColumn);
+				currentColumn++;
+			}
 				// TODO: check if cross condition is detected
-	
 				indexCounter++;
 			}
 			// Store value of beginning of next row in rowStartIndex and use this value to compare next row values for equality
@@ -82,7 +92,6 @@ public class Board {
 			//System.out.println();
 		}
 
-	}
 	
 	
 	public void resetGame() {
