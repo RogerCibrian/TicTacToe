@@ -55,42 +55,52 @@ public class Board {
 	}
 	
 	public void checkWin() {
-		
+
 		resetGame();
-		
+
 		int indexCounter = 0;
 		int rowStartIndex = 0;
 		int currentColumn = 0;
-		
+
 		state[2] = 0;
 		state[5] = 0;
 		state[8] = 0;
 
 		for (int currentRow = 0; currentRow < getRows(); currentRow++) {
+			// TODO: We can probably use one variable for both rows and columns... save some meMORY
 			// check if row we're on is all equal
 			if (getState()[rowStartIndex] == getState()[rowStartIndex + 1] && getState()[rowStartIndex + 1] == getState()[rowStartIndex + 2]) {
-				System.out.println(currentRow + "winning horizontal condition detected");
+				System.out.println("Winning horizontal condition detected on row "+ currentRow);
+				// break out of loop is condition is met... you can't win twice
 				break;
 			}
 			//System.out.print(currentRow);
 			// check if column we're on is all equal
 			else if (getState()[currentColumn] == getState()[currentColumn + 3] && getState()[currentColumn + 3] == getState()[currentColumn + 6]) {
-				System.out.println(currentColumn + "winning vertical condition detected");
+				System.out.println("Winning vertical condition detected on column " + currentColumn);
+				// break out of loop is condition is met... you can't win twice
 				break;
-				
 			}
 			else {
-				System.out.println(currentColumn);
+				System.out.println("The current column is " + currentColumn);
+				System.out.println("The current row is " + currentRow);
 				currentColumn++;
+				// TODO: There is probably a more efficient way to do the below
+				for (int indexTracker = 0; indexTracker < getColumns(); indexTracker++) {
+					indexCounter++;
+				}
+				// Store value of beginning of next row in rowStartIndex and use this value to compare next row values for equality
+				rowStartIndex = indexCounter;
 			}
-				// TODO: check if cross condition is detected
-				indexCounter++;
-			}
-			// Store value of beginning of next row in rowStartIndex and use this value to compare next row values for equality
-			rowStartIndex = indexCounter;
-			// check if column we just exited is all equal
-			//System.out.println();
+
+			// TODO: check if cross condition is detected
+
 		}
+
+
+		// check if column we just exited is all equal
+		//System.out.println();
+	}
 
 	
 	
